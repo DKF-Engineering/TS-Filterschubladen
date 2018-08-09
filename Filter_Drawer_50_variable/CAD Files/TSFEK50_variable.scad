@@ -1,4 +1,5 @@
 //------------------------------------------------------------------
+// see https://customizer.makerbot.com/docs
 label = "S-II"; // this label will be printed on top of the filter drawer, can be used e.g. for the filter name
 //surface finish: black matte
 
@@ -12,11 +13,11 @@ filter_chamfer = 0.3; // not relevant
 //------------------------------------------------------------------
 filter_d_active = filter_dia - 2 * filter_overlap;
 
-drawer_width = 50.0; // width of the internal part of the drawer// TODO: noch anpassen
-drawer_length = 50.0; // length of the internal part of the drawer (without cap!) // TODO: noch anpassen
-fixation_screw_pos = 0.0; // relative to the optical center in x-direction // TODO: noch anpassen
-drawer_thick = 5.0 - 0.1; // TODO: noch anpassen
-holder_height = drawer_length - drawer_width/2; // for internal use
+drawer_width = 56.0 - 0.5; // width of the internal part of the drawer, includes tolerance!
+drawer_length = 56.0 - 0.5; // length of the internal part of the drawer (without cap!)
+fixation_screw_pos = drawer_length - 56.0; // relative to the optical center in x-direction
+drawer_thick = 6.0 - 0.1; // includes tolerance!
+holder_height = drawer_length - drawer_width / 2; // for internal use
 
 THREAD_M3 = 3.0;
 WAF_HEX_M3 = 5.5;
@@ -24,8 +25,8 @@ NUT_HEIGHT_M3 = 2.4;
 THREAD_M4 = 4.0;
 WAF_HEX_M4 = 7.0;
 NUT_HEIGHT_M4 = 3.2 + 0.3; // includes tolerance!
-KNURLED_HEAD_DIA = 10.0; // TODO: noch anpassen
-KNURLED_HEAD_HGT = 8.0; // TODO: noch anpassen
+KNURLED_HEAD_DIA = 10.5;
+KNURLED_HEAD_HGT = 8.1;
 
 // global settings:
 $fn = 360;
@@ -259,8 +260,8 @@ module TS_FS50_Drawer()
 				{
 					*#translate([10.8+holder_height,27.25,0]) rotate([0,90,0]) Screw_Knurled_M4(10);
 					*#translate([10.8+holder_height,-27.25,0]) rotate([0,90,0]) Screw_Knurled_M4(10);
-					drawer();
-					*color("darkgreen") lock();
+					*drawer();
+					lock();
 				}
 		}
 }

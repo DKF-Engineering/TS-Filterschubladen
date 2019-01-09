@@ -1,14 +1,15 @@
 //------------------------------------------------------------------
 // see https://customizer.makerbot.com/docs
-label = "S-II"; // this label will be printed on top of the filter drawer, can be used e.g. for the filter name
+label = "O-III"; // this label will be printed on top of the filter drawer, can be used e.g. for the filter name,
+// be careful to fill only the available space of the lock
 //surface finish: black matte
 
 filter_dia = 36.0;
 filter_thick = 2.0;
 filter_overlap = 1.0; // filter edge area without optical coating, used for retaining the filter
-print = "drawer"; // part to render: "all", "drawer", "lock"
-direction = "FRONT";
+print = "lock"; // part to render: "all", "drawer", "lock"
 //------------------------------------------------------------------
+direction = "FRONT";
 filter_tolerance = 0.2; // clearance to the drawer slot
 filter_chamfer = 0.3; // not relevant
 

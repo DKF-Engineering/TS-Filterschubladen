@@ -7,6 +7,7 @@ filter_dia = 36.0;
 filter_thick = 2.0;
 filter_overlap = 1.0; // filter edge area without optical coating, used for retaining the filter
 print = "drawer"; // part to render: "all", "drawer", "lock"
+direction = "FRONT";
 //------------------------------------------------------------------
 filter_tolerance = 0.2; // clearance to the drawer slot
 filter_chamfer = 0.3; // not relevant
@@ -154,8 +155,9 @@ module drawer()
 					translate([0,drawer_width/2+hutch_dia/2-0.8,0]) sphere(d=hutch_dia, center=true);
 				}
 			translate([holder_height+(NUT_HEIGHT_M4+2*2.0)/2,0,KNURLED_HEAD_DIA/2]) rotate([0,0,90]) scale([0.4,0.4,1]) linear_extrude(height=2.0, center=true) text(str("\u00D8",filter_dia, "mm x ", filter_thick, "mm"), halign="center", valign="center"); // size label
+			translate([holder_height+(NUT_HEIGHT_M4+2*2.0)/2,0,-KNURLED_HEAD_DIA/2]) rotate([0,180,90]) scale([0.4,0.4,1]) linear_extrude(height=2.0, center=true) text(direction, halign="center", valign="center"); // direction label
 		}
-}
+} // drawer
 
 module lock()
 {
@@ -233,7 +235,7 @@ module lock()
 				}
 			translate([holder_height+(NUT_HEIGHT_M4+2*2.0)-0.2*10-1,0,filter_thick/2]) rotate([0,0,90]) scale([0.25,0.4,1]) linear_extrude(height=2.0, center=true, $fn=36) text(str("\u00D8",filter_dia, "mm x ", filter_thick, "mm"), halign="center", valign="center"); // size label
 		}
-}
+} // lock
 
 module TS_FS50_Drawer()
 {

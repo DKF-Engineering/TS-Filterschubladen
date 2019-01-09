@@ -1,11 +1,12 @@
 //------------------------------------------------------------------
 // see https://customizer.makerbot.com/docs
-label = "O-III"; // this label will be printed on top of the filter drawer, can be used e.g. for the filter name
+label = "S-II"; // this label will be printed on top of the filter drawer, can be used e.g. for the filter name
 //surface finish: black matte
 
-filter_dia = 47.0;
-filter_thick = 1.5;
+filter_dia = 36.0;
+filter_thick = 2.0;
 filter_overlap = 1.0; // filter edge area without optical coating, used for retaining the filter
+print = "lock"; // part to render: "all", "drawer", "lock"
 //------------------------------------------------------------------
 filter_tolerance = 0.2; // clearance to the drawer slot
 filter_chamfer = 0.3; // not relevant
@@ -29,7 +30,7 @@ KNURLED_HEAD_DIA = 10.5;
 KNURLED_HEAD_HGT = 8.1;
 
 // global settings:
-$fn = 360;
+$fn = 240;
 min_wt = 1.0; // minimum wall thickness
 
 module filter()
@@ -180,7 +181,7 @@ module lock()
 						}
 					translate([(holder_height+(NUT_HEIGHT_M4+2*2.0))/2, 0, 0]) cube([holder_height+(NUT_HEIGHT_M4+2*2.0), filter_dia+2*filter_tolerance, filter_thick], center=true); // filter barrier
 					
-					translate([holder_height+(NUT_HEIGHT_M4+2*2.0)+cap_height+0.0,0,0]) rotate([90,0,90]) scale([0.5,0.5,1]) linear_extrude(height=2.0, center=true) text(label, halign="center", valign="center"); // label
+					translate([holder_height+(NUT_HEIGHT_M4+2*2.0)+cap_height+0.0,0,0]) rotate([90,0,90]) scale([0.5,0.5,1]) linear_extrude(height=2.0, center=true, $fn=36) text(label, halign="center", valign="center"); // label
 					
 					translate([holder_height+(NUT_HEIGHT_M4+2*2.0)+cap_height+ring_height/2,(drawer_width+THREAD_M4+0.5)/2,0])
 					rotate([0,90,0]) cylinder(d=THREAD_M4+2*1.5, h=ring_height, center=true); // screw offset ring
@@ -230,7 +231,7 @@ module lock()
 					translate([holder_height+(NUT_HEIGHT_M4+2*2.0)+(cap_height+ring_height)/2,(drawer_width+THREAD_M4+0.5)/2,0])
 					rotate([0,90,0]) cylinder(d=THREAD_M4+0.4, h=hole_length+0.1, center=true); // screw hole
 				}
-			translate([holder_height+(NUT_HEIGHT_M4+2*2.0)-0.2*10-1,0,filter_thick/2]) rotate([0,0,90]) scale([0.2,0.2,1]) linear_extrude(height=2.0, center=true) text(str("\u00D8",filter_dia, "mm x ", filter_thick, "mm"), halign="center", valign="center"); // size label
+			translate([holder_height+(NUT_HEIGHT_M4+2*2.0)-0.2*10-1,0,filter_thick/2]) rotate([0,0,90]) scale([0.2,0.2,1]) linear_extrude(height=2.0, center=true, $fn=36) text(str("\u00D8",filter_dia, "mm x ", filter_thick, "mm"), halign="center", valign="center"); // size label
 		}
 }
 
@@ -258,10 +259,13 @@ module TS_FS50_Drawer()
 				}
 			else
 				{
-					*#translate([10.8+holder_height,27.25,0]) rotate([0,90,0]) Screw_Knurled_M4(10);
-					*#translate([10.8+holder_height,-27.25,0]) rotate([0,90,0]) Screw_Knurled_M4(10);
-					*drawer();
-					lock();
+					if (print == "all")
+						{
+							translate([10.8+holder_height,27.25,0]) rotate([0,90,0]) Screw_Knurled_M4(10);
+							translate([10.8+holder_height,-27.25,0]) rotate([0,90,0]) Screw_Knurled_M4(10);
+						}
+					if (print == "all" || print == "drawer") drawer();
+					if (print == "all" || print == "lock") lock();
 				}
 		}
 }

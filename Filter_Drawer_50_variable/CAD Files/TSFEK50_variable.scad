@@ -6,7 +6,7 @@ label = "S-II"; // this label will be printed on top of the filter drawer, can b
 filter_dia = 36.0;
 filter_thick = 2.0;
 filter_overlap = 1.0; // filter edge area without optical coating, used for retaining the filter
-print = "lock"; // part to render: "all", "drawer", "lock"
+print = "drawer"; // part to render: "all", "drawer", "lock"
 //------------------------------------------------------------------
 filter_tolerance = 0.2; // clearance to the drawer slot
 filter_chamfer = 0.3; // not relevant
@@ -153,7 +153,7 @@ module drawer()
 					rotate([180,0,0])
 					translate([0,drawer_width/2+hutch_dia/2-0.8,0]) sphere(d=hutch_dia, center=true);
 				}
-			translate([holder_height+(NUT_HEIGHT_M4+2*2.0)/2,0,KNURLED_HEAD_DIA/2]) rotate([0,0,90]) scale([0.2,0.2,1]) linear_extrude(height=2.0, center=true) text(str("\u00D8",filter_dia, "mm x ", filter_thick, "mm"), halign="center", valign="center"); // size label
+			translate([holder_height+(NUT_HEIGHT_M4+2*2.0)/2,0,KNURLED_HEAD_DIA/2]) rotate([0,0,90]) scale([0.4,0.4,1]) linear_extrude(height=2.0, center=true) text(str("\u00D8",filter_dia, "mm x ", filter_thick, "mm"), halign="center", valign="center"); // size label
 		}
 }
 
@@ -231,7 +231,7 @@ module lock()
 					translate([holder_height+(NUT_HEIGHT_M4+2*2.0)+(cap_height+ring_height)/2,(drawer_width+THREAD_M4+0.5)/2,0])
 					rotate([0,90,0]) cylinder(d=THREAD_M4+0.4, h=hole_length+0.1, center=true); // screw hole
 				}
-			translate([holder_height+(NUT_HEIGHT_M4+2*2.0)-0.2*10-1,0,filter_thick/2]) rotate([0,0,90]) scale([0.2,0.2,1]) linear_extrude(height=2.0, center=true, $fn=36) text(str("\u00D8",filter_dia, "mm x ", filter_thick, "mm"), halign="center", valign="center"); // size label
+			translate([holder_height+(NUT_HEIGHT_M4+2*2.0)-0.2*10-1,0,filter_thick/2]) rotate([0,0,90]) scale([0.25,0.4,1]) linear_extrude(height=2.0, center=true, $fn=36) text(str("\u00D8",filter_dia, "mm x ", filter_thick, "mm"), halign="center", valign="center"); // size label
 		}
 }
 

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------
 // see https://customizer.makerbot.com/docs
-label = "O-III"; // this label will be printed on top of the filter drawer, can be used e.g. for the filter name,
+label = "H-alpha"; // this label will be printed on top of the filter drawer, can be used e.g. for the filter name,
 // be careful to fill only the available space of the lock
 //surface finish: black matte
 
